@@ -1,0 +1,41 @@
+<main class="login-page">
+  <section class="login-card" aria-labelledby="login-title">
+    <div class="login-icon" aria-hidden="true">↗</div>
+    <h1 id="login-title">Welcome back</h1>
+    <p class="login-description">Sign in to continue to your account.</p>
+
+    <form class="login-form">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        type="text"
+        autocomplete="username"
+        value="demo.user"
+      />
+
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        autocomplete="current-password"
+        value="password123"
+      />
+
+      <label class="admin-option" for="admin-login">
+        <input id="admin-login" name="adminLogin" type="checkbox" [(ngModel)]="isAdmin" />
+        Log in as admin
+      </label>
+
+      <button type="button" (click)="login()">Log in</button>
+    </form>
+
+    <p class="login-note">Mockup only — login is not connected yet.</p>
+    <aside class="practice-note">
+      <strong>Routing practice</strong>
+      <p>The checkbox is bound with <code>ngModel</code>. Logging in stores your role, then uses
+        <code>router.navigate()</code> to open the dashboard.</p>
+    </aside>
+  </section>
+</main>

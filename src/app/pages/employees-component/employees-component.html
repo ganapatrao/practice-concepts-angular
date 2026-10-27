@@ -1,0 +1,60 @@
+<section class="employees-page">
+  <div class="page-heading">
+    <div>
+      <h2>Employees</h2>
+      <p>Manage your team members.</p>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Department</th>
+          <th scope="col" class="actions-heading">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (employee of employees; track employee.id) {
+          <tr>
+            <td>{{ employee.id }}</td>
+            <td class="employee-name">{{ employee.name }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.department }}</td>
+            <td>
+              <div class="actions">
+                <button
+                  class="view-button"
+                  type="button"
+                  [routerLink]="['/employees', employee.id]"
+                  [queryParams]="{ mode: 'view' }"
+                >
+                  View
+                </button>
+                <button
+                  class="edit-button"
+                  type="button"
+                  (click)="EditEmployee(employee.id)"
+                >
+                  Edit
+                </button>
+                <button class="delete-button" type="button">Delete</button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <aside class="practice-note">
+    <strong>Routing practice</strong>
+    <p><code>&#64;for</code> creates a row for each employee. View uses <code>routerLink</code> to pass
+      the employee ID as a path parameter and <code>mode=view</code> as a query parameter. Edit
+      passes the ID to <code>router.navigate()</code> with <code>mode=edit</code>. The details
+      route resolves the employee before displaying that page. Delete is a visual placeholder.</p>
+  </aside>
+</section>

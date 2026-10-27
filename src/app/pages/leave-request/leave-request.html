@@ -1,0 +1,82 @@
+<section class="leave-page">
+  <header class="page-heading">
+    <h2>{{ pageTitle }}</h2>
+    <p>{{ instructions }}</p>
+  </header>
+
+  <form #leaveForm="ngForm" (ngSubmit)="submitRequest()">
+    <label for="employee-name">Employee name</label>
+    <input
+      id="employee-name"
+      name="employeeName"
+      type="text"
+      [(ngModel)]="employeeName"
+      (ngModelChange)="markAsChanged()"
+      required
+    />
+
+    <label for="leave-type">Leave type</label>
+    <select
+      id="leave-type"
+      name="leaveType"
+      [(ngModel)]="leaveType"
+      (ngModelChange)="markAsChanged()"
+      required
+    >
+      <option value="" disabled>Select a leave type</option>
+      <option value="annual">Annual leave</option>
+      <option value="sick">Sick leave</option>
+      <option value="personal">Personal leave</option>
+    </select>
+
+    <div class="date-fields">
+      <div>
+        <label for="start-date">Start date</label>
+        <input
+          id="start-date"
+          name="startDate"
+          type="date"
+          [(ngModel)]="startDate"
+          (ngModelChange)="markAsChanged()"
+          required
+        />
+      </div>
+      <div>
+        <label for="end-date">End date</label>
+        <input
+          id="end-date"
+          name="endDate"
+          type="date"
+          [(ngModel)]="endDate"
+          (ngModelChange)="markAsChanged()"
+          required
+        />
+      </div>
+    </div>
+
+    <label for="reason">Reason</label>
+    <textarea
+      id="reason"
+      name="reason"
+      rows="4"
+      [(ngModel)]="reason"
+      (ngModelChange)="markAsChanged()"
+      required
+    ></textarea>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="leaveForm.invalid">Submit request</button>
+      <span class="form-hint">
+        {{ hasUnsavedChanges ? 'Unsaved changes' : 'No unsaved changes' }}
+      </span>
+    </div>
+  </form>
+
+  <aside class="practice-note">
+    <strong>Routing practice</strong>
+    <p>The title and instructions come from static route data via <code>ActivatedRoute.data</code>.
+      This template-driven form uses <code>ngForm</code> and <code>ngModel</code>; editing a field
+      marks it unsaved, and the route's <code>CanDeactivate</code> guard checks that flag when you
+      navigate away.</p>
+  </aside>
+</section>

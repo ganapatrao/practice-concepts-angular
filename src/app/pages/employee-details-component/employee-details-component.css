@@ -1,0 +1,36 @@
+.practice-note h3 {
+  margin: 18px 0 10px;
+  color: #312e81;
+  font-size: 15px;
+}
+
+.resolver-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.resolver-flow li:not(.flow-arrow) {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px;
+  border: 1px solid #c7d2fe;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.resolver-flow strong {
+  color: #312e81;
+}
+
+.resolver-flow .flow-arrow {
+  color: #4f46e5;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}

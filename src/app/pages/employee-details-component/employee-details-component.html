@@ -1,0 +1,65 @@
+<h2>Employee {{ mode === 'edit' ? 'Edit mode' : mode === 'view' ? 'View mode' : 'Details' }}</h2>
+<p>Mode query parameter: {{ mode }}</p>
+
+@if (employee; as employee) {
+  <p>Resolved employee ID: {{ employee.id }}</p>
+
+  @if (mode === 'edit') {
+    <form #employeeForm="ngForm" (ngSubmit)="saveChanges()">
+      <label for="employee-name">Employee name</label>
+      <input
+        id="employee-name"
+        name="employeeName"
+        type="text"
+        [(ngModel)]="employeeName"
+        (ngModelChange)="hasUnsavedChanges = true"
+        required
+      />
+      <button type="submit" [disabled]="employeeForm.invalid">Save</button>
+    </form>
+  } @else {
+    <h3>{{ employee.name }}</h3>
+    <p>Email: {{ employee.email }}</p>
+    <p>Department: {{ employee.department }}</p>
+  }
+} @else {
+  <p role="status">No employee found for ID {{ employeeId }}.</p>
+}
+
+<aside class="practice-note">
+  <strong>Routing practice</strong>
+  <p>The employee ID comes from the <code>:id</code> path parameter, and <code>mode</code> comes
+    from the query string. The employee is loaded by the route resolver and read from
+    <code>ActivatedRoute.data</code>. In edit mode, changing the name marks it unsaved so
+    <code>CanDeactivate</code> can ask before leaving.</p>
+  <h3>Resolver data flow</h3>
+  <ol class="resolver-flow">
+    <li>
+      <strong>Employees page</strong>
+      <code>employees-component.html</code> navigates to <code>/employees/7</code>
+    </li>
+    <li class="flow-arrow" aria-hidden="true">↓</li>
+    <li>
+      <strong>Route configuration</strong>
+      <code>app.routes.ts</code> matches <code>employees/:id</code> and runs
+      <code>employeeResolver</code>
+    </li>
+    <li class="flow-arrow" aria-hidden="true">↓</li>
+    <li>
+      <strong>Resolver</strong>
+      <code>employee.resolver.ts</code> reads the ID and calls
+      <code>EmployeeService.getEmployeeById(id)</code>
+    </li>
+    <li class="flow-arrow" aria-hidden="true">↓</li>
+    <li>
+      <strong>Service</strong>
+      <code>employee.service.ts</code> returns the employee after a simulated delay
+    </li>
+    <li class="flow-arrow" aria-hidden="true">↓</li>
+    <li>
+      <strong>Details component and template</strong>
+      <code>employee-details-component.ts</code> reads <code>data['employee']</code>;
+      this HTML displays the resolved employee
+    </li>
+  </ol>
+</aside>

@@ -1,0 +1,21 @@
+<div class="app-layout">
+  <header class="app-header">
+    <h1>Employee Management Portal</h1>
+
+    <nav aria-label="Main navigation">
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/employees" routerLinkActive="active">Employees</a>
+      <a routerLink="/leave-request" routerLinkActive="active">Leave request</a>
+    </nav>
+  </header>
+
+  <main class="app-content">
+    <router-outlet></router-outlet>
+    <aside class="practice-note">
+      <strong>Routing practice</strong>
+      <p>Menu links use <code>routerLink</code>; <code>routerLinkActive</code> highlights the
+        current route. The selected child page renders in the router outlet above.</p>
+    </aside>
+  </main>
+</div>
