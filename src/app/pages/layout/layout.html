@@ -11,11 +11,22 @@
   </header>
 
   <main class="app-content">
+    @if (notification$ | async; as notification) {
+      <div class="notification" role="status">
+        <span>{{ notification }}</span>
+        <button type="button" aria-label="Dismiss notification" (click)="dismissNotification()">
+          Dismiss
+        </button>
+      </div>
+    }
+
     <router-outlet></router-outlet>
     <aside class="practice-note">
       <strong>Routing practice</strong>
       <p>Menu links use <code>routerLink</code>; <code>routerLinkActive</code> highlights the
         current route. The selected child page renders in the router outlet above.</p>
+      <p>Subject practice: submitting a leave request sends a notification event through a shared
+        service, and this layout subscribes to display it.</p>
     </aside>
   </main>
 </div>

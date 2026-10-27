@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HasUnsavedChanges } from '../../core/guards/un-saved-guard';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-leave-request',
@@ -11,6 +12,7 @@ import { HasUnsavedChanges } from '../../core/guards/un-saved-guard';
 })
 export class LeaveRequest implements HasUnsavedChanges, OnInit {
   private readonly route = inject(ActivatedRoute);
+  private readonly notificationService = inject(NotificationService);
   pageTitle = '';
   instructions = '';
   employeeName = '';
@@ -39,5 +41,6 @@ export class LeaveRequest implements HasUnsavedChanges, OnInit {
 
   submitRequest() {
     this.hasUnsavedChanges = false;
+    this.notificationService.show(`Leave request submitted for ${this.employeeName}. (Mock only)`);
   }
 }
