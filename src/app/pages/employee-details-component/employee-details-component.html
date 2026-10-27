@@ -12,11 +12,18 @@
         name="employeeName"
         type="text"
         [(ngModel)]="employeeName"
-        (ngModelChange)="hasUnsavedChanges = true"
+        (ngModelChange)="hasUnsavedChanges = true; saveMessage = ''"
         required
       />
       <button type="submit" [disabled]="employeeForm.invalid">Save</button>
     </form>
+    @if (saveMessage) {
+      <p class="save-message" role="status">{{ saveMessage }}</p>
+      <p class="save-hint">
+        Return to the Employees page to see the updated name in the list. Its
+        <code>async</code> pipe receives the latest list from the BehaviorSubject.
+      </p>
+    }
   } @else {
     <h3>{{ employee.name }}</h3>
     <p>Email: {{ employee.email }}</p>
@@ -32,6 +39,9 @@
     from the query string. The employee is loaded by the route resolver and read from
     <code>ActivatedRoute.data</code>. In edit mode, changing the name marks it unsaved so
     <code>CanDeactivate</code> can ask before leaving.</p>
+  <p>BehaviorSubject practice: saving publishes the updated employee through
+    <code>EmployeeService</code>. The Employees page receives the latest list from the same
+    BehaviorSubject when you return.</p>
   <h3>Resolver data flow</h3>
   <ol class="resolver-flow">
     <li>

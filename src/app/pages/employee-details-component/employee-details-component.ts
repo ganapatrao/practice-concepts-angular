@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HasUnsavedChanges } from '../../core/guards/un-saved-guard';
-import { Employee } from '../../core/services/employee.service';
+import { Employee, EmployeeService } from '../../core/services/employee.service';
 
 @Component({
   selector: 'app-employee-details-component',
@@ -12,11 +12,13 @@ import { Employee } from '../../core/services/employee.service';
 })
 export class EmployeeDetailsComponent implements OnInit, HasUnsavedChanges {
   route = inject(ActivatedRoute);
+  private readonly employeeService = inject(EmployeeService);
   employeeId: string | null = null;
   mode: string | null = null;
   employee: Employee | undefined;
   employeeName = '';
   hasUnsavedChanges = false;
+  saveMessage = '';
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -35,6 +37,13 @@ export class EmployeeDetailsComponent implements OnInit, HasUnsavedChanges {
   }
 
   saveChanges() {
+    if (!this.employee) {
+      return;
+    }
+
+    this.employee = { ...this.employee, name: this.employeeName };
+    this.employeeService.updateEmployee(this.employee);
     this.hasUnsavedChanges = false;
+    this.saveMessage = `Saved "${this.employee.name}". EmployeeService emitted the updated list through its BehaviorSubject.`;
   }
 }

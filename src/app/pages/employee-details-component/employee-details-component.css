@@ -1,3 +1,19 @@
+.save-message {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border: 1px solid #a7f3d0;
+  border-radius: 7px;
+  background: #ecfdf5;
+  color: #065f46;
+  font-weight: 600;
+}
+
+.save-hint {
+  margin: 8px 0 0;
+  color: #4b5563;
+  font-size: 13px;
+}
+
 .practice-note h3 {
   margin: 18px 0 10px;
   color: #312e81;
