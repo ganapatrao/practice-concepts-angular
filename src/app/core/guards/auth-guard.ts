@@ -23,7 +23,11 @@ export const authChildGuard: CanActivateChildFn = (route) => {
   const role = localStorage.getItem('role');
   const path = route.routeConfig?.path;
 
-  if (role === 'template-practice' && path !== 'template-driven-form-practice') {
+  if (
+    role === 'template-practice' &&
+    path !== 'template-driven-form-practice' &&
+    path !== 'what-is-done'
+  ) {
     return router.createUrlTree(['/template-driven-form-practice']);
   }
 

@@ -1,0 +1,53 @@
+<main class="practice-summary">
+  <header class="summary-header">
+    <p class="eyebrow">Angular practice scenarios</p>
+    <h1>What we have practiced</h1>
+    <p>
+      This page summarizes the mock login, role selection, navigation, and route protection
+      scenarios in this app.
+    </p>
+  </header>
+
+  <section class="scenario-list" aria-label="Practice scenarios">
+    <article class="scenario-card">
+      <h2>1. Choose a practice role at login</h2>
+      <p>
+        The login form has an admin checkbox and a template-driven-form practice checkbox.
+        Selecting template practice stores the <code>template-practice</code> role; otherwise,
+        the admin checkbox chooses between <code>admin</code> and <code>employee</code>.
+      </p>
+    </article>
+
+    <article class="scenario-card">
+      <h2>2. Save the mock login state</h2>
+      <p>
+        Submitting the mock login stores <code>isLoggedIn</code> and <code>role</code> in
+        <code>localStorage</code>. The current-user service reads the saved role when the app
+        starts and publishes role changes to the layout.
+      </p>
+    </article>
+
+    <article class="scenario-card">
+      <h2>3. Navigate according to the selected role</h2>
+      <p>
+        Template-practice users are sent to the template-driven form page and see that page plus
+        this summary in the menu. Admin and employee users keep the existing dashboard, employees,
+        and leave-request links, and can also open this summary.
+      </p>
+    </article>
+
+    <article class="scenario-card">
+      <h2>4. Protect routes with a guard</h2>
+      <p>
+        The authentication guard sends logged-out visitors to login. The child-route guard keeps
+        template-practice users on their practice page, while allowing every logged-in role to
+        visit this summary page.
+      </p>
+    </article>
+  </section>
+
+  <p class="practice-warning">
+    These roles and guards are for learning only. A role stored in <code>localStorage</code> can
+    be changed in the browser, so it is not suitable for real authorization.
+  </p>
+</main>

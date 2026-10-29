@@ -1,0 +1,61 @@
+.practice-summary {
+  width: min(100%, 900px);
+  margin: 0 auto;
+  color: #1f2937;
+}
+
+.summary-header {
+  margin-bottom: 24px;
+}
+
+.summary-header h1 {
+  margin: 4px 0 8px;
+  font-size: 30px;
+}
+
+.summary-header > p:last-child {
+  max-width: 680px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #4338ca;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.scenario-list {
+  display: grid;
+  gap: 14px;
+}
+
+.scenario-card {
+  padding: 18px 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.scenario-card h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.scenario-card p,
+.practice-warning {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.practice-warning {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-left: 4px solid #f59e0b;
+  border-radius: 4px;
+  background: #fffbeb;
+}

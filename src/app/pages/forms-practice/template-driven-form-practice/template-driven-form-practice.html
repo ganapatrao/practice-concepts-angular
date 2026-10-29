@@ -1,1 +1,48 @@
-<p>template-driven-form-practice works!</p>
+<form #employeeform="ngForm" (ngSubmit)="onSubmit(employeeform)" novalidate>
+
+ 
+ <div>
+      <label for="employeename">Employee Name:</label>
+     <input
+    id="employeename"
+    name="employeename"
+    type="text"
+    [(ngModel)]="employeeName"
+    (ngModelChange)="markAsChanged()"
+    required
+    #nameref="ngModel"
+  />
+
+
+  <p *ngIf="nameref.invalid && nameref.touched">Employee name is required.</p>
+ </div>
+
+
+  <div style="margin-top: 20px">
+     <label for="employeeemail">Employee Email:</label>
+     <input
+    id="employeeemail"
+    name="employeeemail"
+    type="email"
+    [(ngModel)]="employeeEmail"
+    (ngModelChange)="markAsChanged()"
+    required
+    email
+    #emailref="ngModel"
+  />
+
+
+
+  <!-- <p *ngIf="emailref.invalid && emailref.touched">Employee email is required.</p> -->
+  
+  <p *ngIf="emailref.errors?.['required'] && emailref.touched">Employee email is required.</p>
+  
+  <p *ngIf="emailref.errors?.['email'] && emailref.touched">enter valid email.</p> 
+</div>
+
+
+
+ <button type="submit">Submit</button>
+ 
+
+</form>
