@@ -13,4 +13,23 @@ const checkLogin = () => {
 };
 
 export const authGuard: CanActivateFn = () => checkLogin();
-export const authChildGuard: CanActivateChildFn = () => checkLogin();
+export const authChildGuard: CanActivateChildFn = (route) => {
+  const loginResult = checkLogin();
+  if (loginResult !== true) {
+    return loginResult;
+  }
+
+  const router = inject(Router);
+  const role = localStorage.getItem('role');
+  const path = route.routeConfig?.path;
+
+  if (role === 'template-practice' && path !== 'template-driven-form-practice') {
+    return router.createUrlTree(['/template-driven-form-practice']);
+  }
+
+  if (role !== 'template-practice' && path === 'template-driven-form-practice') {
+    return router.createUrlTree(['/dashboard']);
+  }
+
+  return true;
+};

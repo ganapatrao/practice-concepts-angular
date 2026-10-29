@@ -12,6 +12,7 @@ import { unSavedGuard } from './core/guards/un-saved-guard';
 import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
 import { adminMatchGuard } from './core/guards/admin-match-guard';
 import { employeeResolver } from './core/resolvers/employee.resolver';
+import { TemplateDrivenFormPractice } from './pages/forms-practice/template-driven-form-practice/template-driven-form-practice';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -27,6 +28,10 @@ export const routes: Routes = [
       // when CanMatch returns false, Angular tries the next matching route.
       { path: 'dashboard', component: AdminDashboard, canMatch: [adminMatchGuard] },
       { path: 'dashboard', component: DashboardComponet },
+      {
+        path: 'template-driven-form-practice',
+        component: TemplateDrivenFormPractice,
+      },
       { path: 'employees', component: EmployeesComponent },
       {
         path: 'leave-request',

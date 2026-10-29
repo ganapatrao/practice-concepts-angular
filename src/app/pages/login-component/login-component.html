@@ -28,14 +28,24 @@
         Log in as admin
       </label>
 
+      <label class="admin-option" for="template-practice-login">
+        <input
+          id="template-practice-login"
+          name="templatePractice"
+          type="checkbox"
+          [(ngModel)]="isTemplatePractice"
+        />
+        Template-driven form practice only
+      </label>
+
       <button type="button" (click)="login()">Log in</button>
     </form>
 
     <p class="login-note">Mockup only — login is not connected yet.</p>
     <aside class="practice-note">
       <strong>Routing practice</strong>
-      <p>The checkbox is bound with <code>ngModel</code>. Logging in stores your role, then uses
-        <code>router.navigate()</code> to open the dashboard.</p>
+      <p>Select template practice to store that role and open only its practice page. Otherwise,
+        the admin checkbox selects the existing admin or employee dashboard.</p>
     </aside>
   </section>
 </main>

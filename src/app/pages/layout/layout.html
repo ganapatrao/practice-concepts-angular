@@ -3,10 +3,22 @@
     <h1>Employee Management Portal</h1>
 
     <nav aria-label="Main navigation">
-      <a routerLink="/login" routerLinkActive="active">Login</a>
-      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-      <a routerLink="/employees" routerLinkActive="active">Employees</a>
-      <a routerLink="/leave-request" routerLinkActive="active">Leave request</a>
+      @if (role$ | async; as role) {
+        @if (role === 'template-practice') {
+          <a
+            routerLink="/template-driven-form-practice"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+          >
+            Template-driven form
+          </a>
+        } @else {
+          <a routerLink="/login" routerLinkActive="active">Login</a>
+          <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+          <a routerLink="/employees" routerLinkActive="active">Employees</a>
+          <a routerLink="/leave-request" routerLinkActive="active">Leave request</a>
+        }
+      }
     </nav>
   </header>
 
