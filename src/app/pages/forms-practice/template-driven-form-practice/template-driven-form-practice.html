@@ -1,48 +1,130 @@
 <form #employeeform="ngForm" (ngSubmit)="onSubmit(employeeform)" novalidate>
+  <div>
+    <label for="employeename">Employee Name:</label>
+    <input
+      id="employeename"
+      name="employeename"
+      type="text"
+      class="validation-control"
+      [(ngModel)]="employeeName"
+      (ngModelChange)="markAsChanged()"
+      required
+      minlength="3"
+      #nameref="ngModel"
+    />
 
- 
- <div>
-      <label for="employeename">Employee Name:</label>
-     <input
-    id="employeename"
-    name="employeename"
-    type="text"
-    [(ngModel)]="employeeName"
-    (ngModelChange)="markAsChanged()"
-    required
-    #nameref="ngModel"
-  />
+    <p *ngIf="nameref.errors?.['required'] && nameref.touched">Employee name is required.</p>
+    <!-- nameref.invalid && nameref.touched is for generic validation -->
 
-
-  <p *ngIf="nameref.invalid && nameref.touched">Employee name is required.</p>
- </div>
-
+    <p *ngIf="nameref.errors?.['minlength'] && nameref.touched">
+      Employee name must be at least 3 characters long.
+    </p>
+  </div>
 
   <div style="margin-top: 20px">
-     <label for="employeeemail">Employee Email:</label>
-     <input
-    id="employeeemail"
-    name="employeeemail"
-    type="email"
-    [(ngModel)]="employeeEmail"
-    (ngModelChange)="markAsChanged()"
-    required
-    email
-    #emailref="ngModel"
-  />
+    <label for="employeeemail">Employee Email:</label>
+    <input
+      id="employeeemail"
+      name="employeeemail"
+      type="email"
+      class="validation-control"
+      [(ngModel)]="employeeEmail"
+      (ngModelChange)="markAsChanged()"
+      required
+      email
+      #emailref="ngModel"
+    />
 
+    <!-- <p *ngIf="emailref.invalid && emailref.touched">Employee email is required.</p> -->
 
+    <p *ngIf="emailref.errors?.['required'] && emailref.touched">Employee email is required.</p>
 
-  <!-- <p *ngIf="emailref.invalid && emailref.touched">Employee email is required.</p> -->
-  
-  <p *ngIf="emailref.errors?.['required'] && emailref.touched">Employee email is required.</p>
-  
-  <p *ngIf="emailref.errors?.['email'] && emailref.touched">enter valid email.</p> 
-</div>
+    <p *ngIf="emailref.errors?.['email'] && emailref.touched">enter valid email.</p>
+  </div>
 
+  <div style="margin-top: 20px">
+    <label for="employeedepartment">Employee Department:</label>
 
+    <select
+      name="department"
+      id="deprtment"
+      class="validation-control"
+      [(ngModel)]="department"
+      required
+      #departmentref="ngModel"
+    >
+      <option value="">Select Department</option>
+      @for (item of departments; track $index) {
+        <option value="{{ item }}">{{ item }}</option>
+      }
+      <!-- <option value="">Select Department</option>
+       <option value="IT">IT</option>
+       <option value="HR">HR</option>
+       <option value="Finance">Finance</option> -->
+    </select>
+  </div>
 
- <button type="submit">Submit</button>
- 
+  <div style="margin-top: 20px">
+    <input
+      type="radio"
+      name="gender"
+      value="female"
+      [(ngModel)]="gender"
+      required
+      #genderref="ngModel"
+    />
+    <label for="female">Female</label>
+    <input
+      type="radio"
+      name="gender"
+      value="male"
+      [(ngModel)]="gender"
+      required
+      #genderref="ngModel"
+    />
+    <label for="male">Male</label>
+  </div>
 
+  <label for="skills">Skills</label>
+  @for (skill of availableSkills; track skill) {
+    <label>
+      <input
+        type="checkbox"
+        name="skills"
+        [checked]="selectedSkills.includes(skill)"
+        (change)="onSkillsChange(skill, $event)"
+      />
+      {{ skill }}
+    </label>
+  }
+
+  <div>
+    <div></div>
+    <input
+      type="checkbox"
+      name="skills"
+      [(ngModel)]="termsandcodition"
+      required
+      #termsref="ngModel"
+    />
+    <label for="terms">I accept the terms and conditions</label>
+  </div>
+
+  <div>
+    @for (mode of workmode; track mode) {
+      <label>
+        <input
+          type="checkbox"
+          name="workmode"
+          [value]="mode.name"
+          [(ngModel)]="mode.selected"
+          required
+          #workmoderef="ngModel"
+        />
+        {{ mode.name }}
+      </label>
+    }
+  </div>
+
+  <button type="submit">Submit</button>
 </form>
